@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Validation test suite">
+    <test name="validation test">
+        <groups>
+            <run>
+                <include name="hk"/>
+                <include name="cert"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.gcw.testautomation.tests.functionalValidation.TestDemo"></class>
+        </classes>
+    </test>
+</suite>
