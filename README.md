@@ -12,6 +12,7 @@ This is a api automation test framework, based on JAVA.
 #### 示例
        @Test(groups = {"phoneAddress"})
     public void testFrameworkHappyCase() throws JsonProcessingException {
+        BaseStep baseStep = BaseStepFactory.getBaseStep()
         baseStep.setBaseUri(uri);
         baseStep.updateQueryParam("key",key);
         baseStep.updateQueryParam("phone",phone);
