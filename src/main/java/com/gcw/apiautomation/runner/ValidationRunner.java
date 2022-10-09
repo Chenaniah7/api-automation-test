@@ -8,10 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.TestNG;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.xml.*;
 
 import java.lang.reflect.Method;
@@ -39,7 +36,6 @@ public class ValidationRunner {
             Set<String> testPackages = new HashSet<>();
             testPackages.add(String.format("%s.functionalValidation",ValidationRunner.BASE_TEST_PACKAGE));
             testPackages.add(String.format("%s.requestValidation",ValidationRunner.BASE_TEST_PACKAGE));
-            System.out.println("found all test packages success");
             testPackages.forEach(this::createTestNGTestSuites);
         }
         this.runSuites();
@@ -72,8 +68,6 @@ public class ValidationRunner {
 
     private List<Map<String,String>> getTests(final String packageName){
         final Reflections reflections = new Reflections(packageName);
-        System.out.println("found the reflection:--"+reflections.toString());
-        //获取所有加了@Test注解的类
         final Set<Class<?>> testClasses = reflections.getTypesAnnotatedWith(Test.class);
         System.out.println(testClasses.toString());
         final List<Map<String,String>> testList = new ArrayList<>();
@@ -100,12 +94,10 @@ public class ValidationRunner {
     }
 
     private Set<String> getGroupsOnTestClass(final Class<?> testClass){
-        //获取每个测试类的group
         final List<String> groupsOnTestClass = Arrays.asList(testClass.getAnnotation(Test.class).groups());
         final Set<String> groups = new HashSet<>(groupsOnTestClass);
 
         final List<Method> testMethods = Arrays.asList(testClass.getMethods());
-        //遍历测试类下面的所有测试方法，获取方法上面的group
         testMethods.forEach(t -> {
             final Set<String> groupsOnTestMethod = getGroupsOnTestMethod(t);
             groups.addAll(groupsOnTestMethod);
@@ -115,7 +107,6 @@ public class ValidationRunner {
     }
 
     private Set<String> getGroupsOnTestMethod(final Method testMethod){
-        //判断每个方法是否有@Test注解
         Set<String> groups = new HashSet<>();
         Arrays.asList(testMethod.getAnnotations()).forEach(annotation -> {
             if ("org.testng.annotations.Test".equalsIgnoreCase(annotation.annotationType().getCanonicalName())){
@@ -166,8 +157,5 @@ public class ValidationRunner {
         return suitesList;
     }
 
-    public void setSuitesList(List<XmlSuite> suitesList) {
-        this.suitesList = suitesList;
-    }
 }
 

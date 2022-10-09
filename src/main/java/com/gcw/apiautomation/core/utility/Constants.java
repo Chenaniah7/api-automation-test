@@ -18,6 +18,9 @@ public class Constants {
 
     public static final String RELEASE_REASON_LIST = "regression, healthcheck";
 
-    private Constants(){}
+    public static final String API_CORE_LOGGING_LEVEL = "apiCodeLoggingLevel";
 
+    public static final String DEBUG = "debug";
+
+    public static final String LIST_OF_LOGGING_LEVELS = "info,error,debug,trace,warn,all";
 }
