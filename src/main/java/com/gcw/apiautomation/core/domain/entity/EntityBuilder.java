@@ -17,7 +17,6 @@ public class EntityBuilder {
 
     private static String accountType = null;
 
-    //new 一个EntityBuilder对象的时候调用静态方法，获取到用户输入的entity
     static {
         EntityBuilder.entity = System.getProperty(Constants.ENTITY);
         final String msg = String.format("Entity: %s",EntityBuilder.entity);
@@ -32,7 +31,6 @@ public class EntityBuilder {
 
 
     public static Entity buildEntity(){
-        //通过loadConfig方法，再根据用户输入的entity和env的值，从而获取到测试所需要的的config对象
         loadConfig(EntityBuilder.entity);
         return new Entity(EntityBuilder.entity);
     }

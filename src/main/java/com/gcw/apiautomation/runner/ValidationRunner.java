@@ -52,7 +52,6 @@ public class ValidationRunner {
 
     private void createTestNGTestSuites(final String testPackage){
         final List<Map<String, String>> testClassList = this.getTests(testPackage);
-        System.out.println("found all test class list");
         if (testClassList.isEmpty()){
             return;
         }

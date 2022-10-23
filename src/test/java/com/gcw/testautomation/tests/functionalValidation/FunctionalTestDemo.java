@@ -6,13 +6,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gcw.apiautomation.core.BaseStep;
 import com.gcw.apiautomation.core.BaseStepFactory;
+import com.gcw.apiautomation.listenner.ValidationTestListener;
 import com.gcw.testautomation.support.beans.PhoneAddress;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Test(groups = {"cert"})
-public class TestDemo {
+@Listeners(ValidationTestListener.class)
+@Test(groups = "cert")
+public class FunctionalTestDemo {
 
     private static BaseStep baseStep = BaseStepFactory.getBaseStep();
     private String uri = "http://apis.juhe.cn/mobile/get";
@@ -22,7 +25,7 @@ public class TestDemo {
     private String phone ="13808898544";
 
 
-    @Test(groups = {"phoneAddress"})
+    @Test(groups = "phoneAddress",enabled = false)
     public void testFrameworkHappyCase() throws JsonProcessingException {
         baseStep.setBaseUri(uri);
         baseStep.updateQueryParam("key",key);
@@ -35,5 +38,15 @@ public class TestDemo {
         Assert.assertEquals(phoneAddress.getProvince(),"广东");
     }
 
+
+    @Test(groups = "phoneAddress")
+    public void TestCertSmoke(){
+        System.out.println("cert smoke test rrrrrrrr");
+    }
+
+    @Test(groups = "phoneAddress")
+    public void TestCertSmoke2(){
+        System.out.println("cert smoke test 22222222222");
+    }
 
 }

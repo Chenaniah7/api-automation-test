@@ -8,9 +8,7 @@ import java.util.Map;
 
 public class BaseStep extends RestJobProvider {
 
-    /*
-    用来存放一些测试时需要临时保存的数据
-     */
+
     public Map<String,Object> testValue = new HashMap<>();
 
     public Map<String, Object> getTestValue() {
